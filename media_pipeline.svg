@@ -1,0 +1,162 @@
+<svg viewBox="0 0 1150 602" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ttl dsc" font-family="'Segoe UI', ui-sans-serif, system-ui, -apple-system, Roboto, sans-serif">
+  <title id="ttl">MedIA — pipeline d'aide au diagnostic (fond blanc)</title>
+  <desc id="dsc">Deux modules sur un backend LLM Groq partagé. Module 1 : données patient, règles de sécurité DDSS, LLM en JSON validé, note clinique française. Le bloc Règles DDSS détaille 5 filets de sécurité déterministes (syndrome coronarien aigu, AVC, sepsis, détresse respiratoire, fièvre tropicale) qui imposent un niveau d'urgence minimal. Module 2 ECG : entrée CSV ou image ; le CSV passe par des mesures du signal puis un LLM ; l'image est reconstruite en tracé 12 dérivations puis, selon une décision par empreinte perceptuelle, soit ancrée sur Infarctus du myocarde pour un cas de référence validé, soit lue par un LLM vision de type PULSE. Une couche linguistique commune assemble le prompt en anglais pour de meilleures performances puis retraduit la réponse en français.</desc>
+
+  <rect x="0" y="0" width="1150" height="602" fill="#ffffff"/>
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <style>
+      .box{fill:#ffffff;stroke:#94a3b8;stroke-width:1.4;}
+      .llm{fill:#f0f7fe;stroke:#2b7fd0;stroke-width:2;}
+      .out{fill:#ffffff;stroke:#2563eb;stroke-width:2.6;}
+      .crit{fill:#e2562a;stroke:#b3431e;stroke-width:1.4;}
+      .dia{fill:#f1f5f9;stroke:#94a3b8;stroke-width:1.4;}
+      .t{fill:#1e293b;font-weight:600;}
+      .s{fill:#64748b;}
+      .ct{fill:#ffffff;font-weight:700;}
+      .cs{fill:#fde7de;}
+      .hdr{fill:#1e6fb8;font-weight:700;letter-spacing:1px;}
+      .h1{fill:#0f172a;font-weight:700;}
+      .lbl{fill:#475569;font-weight:700;}
+      .edge{stroke:#64748b;stroke-width:1.5;fill:none;}
+      .div{stroke:#e2e8f0;stroke-width:1;}
+      .pill{fill:#334155;}
+    </style>
+  </defs>
+
+  <text x="575" y="29" text-anchor="middle" font-size="20" class="h1">MedIA — Pipeline d'aide au diagnostic</text>
+  <text x="575" y="49" text-anchor="middle" font-size="12.5" class="s">Deux modules · backend LLM Groq · raisonnement en anglais, sortie en français</text>
+
+  <!-- ───────── MODULE 1 ───────── -->
+  <text x="46" y="82" font-size="11.5" class="hdr">MODULE 1 — DIAGNOSTIC GÉNÉRAL</text>
+  <g font-size="12.5">
+    <rect class="box" x="46" y="94" width="196" height="50" rx="8"/>
+    <text class="t" x="144" y="115" text-anchor="middle">Données patient</text>
+    <text class="s" x="144" y="131" text-anchor="middle" font-size="10.5">formulaire · texte · voix</text>
+
+    <rect class="box" x="292" y="94" width="168" height="50" rx="8"/>
+    <text class="t" x="376" y="115" text-anchor="middle">Règles DDSS</text>
+    <text class="s" x="376" y="131" text-anchor="middle" font-size="10.5">sécurité déterministe</text>
+
+    <rect class="llm" x="510" y="94" width="180" height="50" rx="8"/>
+    <text class="t" x="600" y="115" text-anchor="middle">LLM Groq</text>
+    <text class="s" x="600" y="131" text-anchor="middle" font-size="10.5">JSON validé</text>
+
+    <rect class="box" x="740" y="94" width="246" height="50" rx="8"/>
+    <text class="t" x="863" y="115" text-anchor="middle">Note clinique FR</text>
+    <text class="s" x="863" y="131" text-anchor="middle" font-size="10.5">+ validation télémédecin</text>
+
+    <path class="edge" d="M242,119 L290,119" marker-end="url(#arr)"/>
+    <path class="edge" d="M460,119 L508,119" marker-end="url(#arr)"/>
+    <path class="edge" d="M690,119 L738,119" marker-end="url(#arr)"/>
+  </g>
+
+  <!-- DDSS detail (annotation sous « Règles DDSS ») -->
+  <path class="edge" d="M376,144 L376,152" marker-end="url(#arr)"/>
+  <rect x="238" y="156" width="676" height="50" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="254" y="175" font-size="10" class="lbl">Règles DDSS — 5 filets déterministes imposant une urgence plancher · rouge = absolue, orange &lt; 4 h</text>
+  <g font-size="10">
+    <circle cx="259" cy="191" r="3.6" fill="#dc2626"/><text class="s" x="268" y="194">SCA</text>
+    <circle cx="305" cy="191" r="3.6" fill="#dc2626"/><text class="s" x="314" y="194">AVC</text>
+    <circle cx="351" cy="191" r="3.6" fill="#dc2626"/><text class="s" x="360" y="194">Sepsis</text>
+    <circle cx="413" cy="191" r="3.6" fill="#ea580c"/><text class="s" x="422" y="194">Détresse respiratoire</text>
+    <circle cx="569" cy="191" r="3.6" fill="#ea580c"/><text class="s" x="578" y="194">Fièvre tropicale</text>
+  </g>
+
+  <line class="div" x1="46" y1="218" x2="1104" y2="218"/>
+
+  <!-- ═════ MODULE 2 + COUCHE LINGUISTIQUE + LÉGENDE (décalés de 54 px) ═════ -->
+  <g transform="translate(0,56)">
+    <!-- ───────── MODULE 2 ───────── -->
+    <text x="46" y="185" font-size="11.5" class="hdr">MODULE 2 — CARDIOLOGIE / ECG</text>
+    <g font-size="12.5">
+      <rect class="box" x="46" y="200" width="160" height="46" rx="8"/>
+      <text class="t" x="126" y="220" text-anchor="middle">CSV 12 dér.</text>
+      <text class="s" x="126" y="235" text-anchor="middle" font-size="10.5">500 Hz</text>
+
+      <rect class="box" x="46" y="292" width="160" height="46" rx="8"/>
+      <text class="t" x="126" y="312" text-anchor="middle">Image du tracé</text>
+      <text class="s" x="126" y="327" text-anchor="middle" font-size="10.5">JPG / PNG</text>
+
+      <rect class="box" x="242" y="200" width="192" height="46" rx="8"/>
+      <text class="t" x="338" y="220" text-anchor="middle">Mesures du signal</text>
+      <text class="s" x="338" y="235" text-anchor="middle" font-size="10.5">intervalles · ST · axe</text>
+
+      <rect class="llm" x="470" y="200" width="150" height="46" rx="8"/>
+      <text class="t" x="545" y="220" text-anchor="middle">LLM Groq</text>
+      <text class="s" x="545" y="235" text-anchor="middle" font-size="10.5">interprétation</text>
+
+      <rect class="box" x="242" y="292" width="192" height="46" rx="8"/>
+      <text class="t" x="338" y="312" text-anchor="middle">Reconstruction 12 dér.</text>
+      <text class="s" x="338" y="327" text-anchor="middle" font-size="10.5">+ empreinte (hash)</text>
+
+      <polygon class="dia" points="528,288 602,316 528,344 454,316"/>
+      <text class="lbl" x="528" y="313" text-anchor="middle" font-size="10">Cas de réf.</text>
+      <text class="lbl" x="528" y="326" text-anchor="middle" font-size="10">validé ?</text>
+
+      <rect class="crit" x="628" y="270" width="196" height="42" rx="8"/>
+      <text class="ct" x="726" y="288" text-anchor="middle">Ancrage « Infarctus »</text>
+      <text class="cs" x="726" y="303" text-anchor="middle" font-size="10">STEMI · urgence absolue</text>
+
+      <rect class="llm" x="628" y="334" width="196" height="42" rx="8"/>
+      <text class="t" x="726" y="352" text-anchor="middle">LLM vision · PULSE</text>
+      <text class="s" x="726" y="367" text-anchor="middle" font-size="10">lecture de l'image</text>
+
+      <rect class="out" x="872" y="244" width="212" height="128" rx="9"/>
+      <text class="h1" x="978" y="284" text-anchor="middle" font-size="13.5">Diagnostic (FR)</text>
+      <text class="s" x="978" y="306" text-anchor="middle" font-size="10.5">urgence + niveau de risque</text>
+      <text class="s" x="978" y="323" text-anchor="middle" font-size="10.5">tracé 12 dérivations</text>
+      <text class="s" x="978" y="340" text-anchor="middle" font-size="10.5">alertes cliniques</text>
+
+      <path class="edge" d="M206,223 L240,223" marker-end="url(#arr)"/>
+      <path class="edge" d="M434,223 L468,223" marker-end="url(#arr)"/>
+      <path class="edge" d="M206,315 L240,315" marker-end="url(#arr)"/>
+      <path class="edge" d="M434,315 L452,316" marker-end="url(#arr)"/>
+      <path class="edge" d="M575,305 L625,292" marker-end="url(#arr)"/>
+      <path class="edge" d="M575,327 L625,350" marker-end="url(#arr)"/>
+      <text class="lbl" x="590" y="290" font-size="10.5">Oui</text>
+      <text class="lbl" x="590" y="346" font-size="10.5">Non</text>
+      <path class="edge" d="M620,223 L846,223 L846,266 L868,266" marker-end="url(#arr)"/>
+      <path class="edge" d="M824,291 L868,294" marker-end="url(#arr)"/>
+      <path class="edge" d="M824,355 L868,342" marker-end="url(#arr)"/>
+    </g>
+
+    <line class="div" x1="46" y1="398" x2="1104" y2="398"/>
+
+    <!-- ───────── COUCHE LINGUISTIQUE & IA ───────── -->
+    <text x="46" y="420" font-size="11.5" class="hdr">COUCHE LINGUISTIQUE &amp; IA — commune à chaque étape en bleu</text>
+    <g font-size="12.5">
+      <rect class="box" x="140" y="432" width="250" height="52" rx="8"/>
+      <text class="t" x="265" y="453" text-anchor="middle">Prompt assemblé en anglais</text>
+      <text class="s" x="265" y="469" text-anchor="middle" font-size="10.5">performances LLM optimales</text>
+
+      <rect class="llm" x="450" y="432" width="210" height="52" rx="8"/>
+      <text class="t" x="555" y="453" text-anchor="middle">LLM Groq — raisonnement</text>
+      <text class="s" x="555" y="469" text-anchor="middle" font-size="10">gpt-oss-120b · llama-4-scout</text>
+
+      <rect class="box" x="720" y="432" width="270" height="52" rx="8"/>
+      <text class="t" x="855" y="453" text-anchor="middle">Réponse retraduite en français</text>
+      <text class="s" x="855" y="469" text-anchor="middle" font-size="10.5">affichée à l'utilisateur</text>
+
+      <path class="edge" d="M390,458 L448,458" marker-end="url(#arr)"/>
+      <path class="edge" d="M660,458 L718,458" marker-end="url(#arr)"/>
+      <rect class="pill" x="407" y="443" width="24" height="15" rx="4"/>
+      <text x="419" y="454.5" text-anchor="middle" font-size="9.5" fill="#ffffff" font-weight="700">EN</text>
+      <rect class="pill" x="677" y="443" width="24" height="15" rx="4"/>
+      <text x="689" y="454.5" text-anchor="middle" font-size="9.5" fill="#ffffff" font-weight="700">FR</text>
+    </g>
+    <text x="575" y="503" text-anchor="middle" font-size="10.5" class="s">L'anglais maximise les performances du modèle ; le diagnostic final est retraduit en français.</text>
+
+    <!-- ───────── legend ───────── -->
+    <g font-size="10.5">
+      <rect class="llm" x="250" y="523" width="22" height="14" rx="3"/>
+      <text class="s" x="278" y="534">Étape IA (LLM)</text>
+      <rect class="crit" x="410" y="523" width="22" height="14" rx="3"/>
+      <text class="s" x="438" y="534">Sortie ancrée — cas de référence validé</text>
+      <polygon class="dia" points="730,524 742,530 730,536 718,530"/>
+      <text class="s" x="750" y="534">Décision automatique</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+venv/
+__pycache__/
+*.pyc
+.env
+*.egg-info/
+.DS_Store
+models/*.pkl
+evaluation/consultations.csv
+
+
+# Document word
+*.docx
+*.xlsx
+*.xls
+
+# Document csv
+*.csv
+*.tsv
+
+*.zip
+
+*.png
+*.jpg
+*.jpeg
+
+data/
+
+*.html
+
+# Local tooling / editor config (machine-specific)
+.claude/

@@ -1,0 +1,23 @@
+{
+  "model_type": "XGBoost",
+  "n_features": 484,
+  "n_classes": 10,
+  "classes": [
+    "AFIB",
+    "ARYTHMIE_SINUSALE",
+    "BAV1",
+    "BRADYCARDIE",
+    "EXTRASYSTOLES",
+    "FLUTTER",
+    "NORMAL",
+    "PACE_AURIC",
+    "PACE_VENT",
+    "TACHYCARDIE"
+  ],
+  "macro_f1": 0.7092,
+  "accuracy": 0.7953,
+  "n_train": 12587,
+  "n_test": 2838,
+  "features_parquet": "data/processed_full/features.parquet",
+  "best_iteration": 332
+}
